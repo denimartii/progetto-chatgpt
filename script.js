@@ -11,6 +11,7 @@ function calcolaSettimaneEMesi() {
 
     if (isNaN(giorno) || isNaN(mese) || isNaN(anno) || giorno < 1 || mese < 1 || mese > 12 || anno < 1900) {
         document.getElementById('risultato').innerHTML = "Inserisci una data valida.";
+        document.getElementById('dataParto').innerHTML = "";
         return;
     }
 
@@ -18,6 +19,7 @@ function calcolaSettimaneEMesi() {
     const giorniMese = [31, (isBisestile(anno) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     if (giorno > giorniMese[mese - 1]) {
         document.getElementById('risultato').innerHTML = `Il mese ${mese} dell'anno ${anno} ha solo ${giorniMese[mese - 1]} giorni.`;
+        document.getElementById('dataParto').innerHTML = "";
         return;
     }
 
@@ -27,13 +29,14 @@ function calcolaSettimaneEMesi() {
     // Ottieni la data odierna
     const dataOggi = new Date();
 
-    // Calcola la data limite di 12 mesi fa
-    const dataLimite12Mesi = new Date();
-    dataLimite12Mesi.setMonth(dataOggi.getMonth() - 12);
+    // Calcola la data limite di 10 mesi fa
+    const dataLimite10Mesi = new Date();
+    dataLimite10Mesi.setMonth(dataOggi.getMonth() - 10);
 
-    // Verifica se la data di inizio gravidanza è più vecchia di 12 mesi
-    if (dataInizio < dataLimite12Mesi) {
-        document.getElementById('risultato').innerHTML = "La data di inizio gravidanza non può essere più vecchia di 12 mesi.";
+    // Verifica se la data di inizio gravidanza è più vecchia di 10 mesi
+    if (dataInizio < dataLimite10Mesi) {
+        document.getElementById('risultato').innerHTML = "La data di inizio gravidanza non può essere più vecchia di 10 mesi.";
+        document.getElementById('dataParto').innerHTML = "";
         return;
     }
 
