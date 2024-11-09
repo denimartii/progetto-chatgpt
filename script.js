@@ -27,19 +27,9 @@ function calcolaSettimaneEMesi() {
     // Ottieni la data odierna
     const dataOggi = new Date();
 
-    // Calcola la data limite di 9 mesi fa
-    const dataLimite9Mesi = new Date();
-    dataLimite9Mesi.setMonth(dataOggi.getMonth() - 9);
-
     // Calcola la data limite di 12 mesi fa
     const dataLimite12Mesi = new Date();
     dataLimite12Mesi.setMonth(dataOggi.getMonth() - 12);
-
-    // Verifica se la data di inizio gravidanza è valida
-    if (dataInizio > dataLimite9Mesi) {
-        document.getElementById('risultato').innerHTML = "La data di inizio gravidanza non può superare i 9 mesi a partire dalla data odierna.";
-        return;
-    }
 
     // Verifica se la data di inizio gravidanza è più vecchia di 12 mesi
     if (dataInizio < dataLimite12Mesi) {
