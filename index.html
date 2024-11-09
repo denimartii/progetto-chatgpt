@@ -8,30 +8,49 @@
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif; /* Font Comic Sans */
-            background-color: #fce4ec; /* Rosa chiaro */
+            background: linear-gradient(to right, #fce4ec, #ff80ab); /* Gradiente rosa */
             margin: 0;
             padding: 0;
             color: #333;
-            /* Imposta l'immagine di sfondo con l'URL che hai fornito */
-            background-image: url('https://chat.google.com/u/0/api/get_attachment_url?url_type=FIFE_URL&content_type=image%2Fwebp&attachment_token=AOo0EEUsTP9aKXx9LB2iExUeyfn3O0giE7lGErIPapqpEl0HLHLDNoS8Gp6P5%2FBVWvrW3eFLm22sOFx4m8QitOOGZBzD4xc%2FiVQMzWxQKZa%2B0BgxWxmcH26HFzpeEg2kCsTIzbodZRS57iQ7DSVVRkGLZgr%2BgmVmYliYY998tdwfTNgS8UnWwNpXKkHEThJh4%2FlZCaVqdXSE5ojAXC%2BfvMp%2BBP7gum%2F2tOwfa1y7RnXTtWpNaEpMN5vJhN2cLO7%2FPZPbsBbfsEHHw%2FsFaQpcunkOkaQ78YJ9rh86YGmW5Cj8MIqXdtBV7eq3XiRd%2BbS%2BMIxI5opi0InSjnhQLjILxiRbscfM%2BmNalE30HP5LhubpOn5FjNDYECheU4T14ByFNFntukBKmlWInF7dXTb%2B3t0%2F0Aeki3RYFd2LRqOEXHRiDPCVjcUcLny%2By08zo5QySW6Kz%2FTcaAwy0yHwTDKPR7QqLDhdaW2EM58uo718VewUrkt6AeN5wYcPVVj%2Fpa3UegGDsUle56pNHObD3MzvJh9N%2BlrD2RiEGQP%2B%2FzJStWeoqyftcmr29AgCYr%2BoNya37%2Fn9lvc5RxNzWOf4iBNk3RIf05wmoGWBESGCG%2BimQxFxP3%2BGYGJJUXGD9CKxEi3RyvYY9T5LEZXfA4NUL2qDkM4PS%2B%2B8M2BrbOjXlVKomyMMMsZHzwvmvEBDTjpx861fMOytoD0tYmF4okRV2r%2FnfWjku%2FCPLU6wsymtSYHgsoJvHRsG%2B0n5g%2BN0sz%2BMAN2683NeNvwgQi4yxah8Z%2Fwtalvd2V31mXHDAKhSSXZm9UGgD%2FKj6%2FeJ&sz=w512');
-            background-position: center; /* Centra l'immagine */
-            background-repeat: no-repeat; /* Non ripetere l'immagine */
-            background-size: contain; /* Rimpicciolisce l'immagine per adattarla al contenitore senza distorsioni */
-            background-attachment: fixed; /* Mantieni l'immagine fissa durante lo scroll */
-            overflow-y: auto; /* Permette lo scroll verticale */
-            height: 100vh; /* Imposta l'altezza a 100vh per adattare meglio al viewport */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* L'altezza dell'intero schermo */
+            overflow: hidden; /* Impedisce lo scroll */
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8); /* Sfondo bianco semitrasparente */
+            position: relative;
+        }
+
+        .left-side {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .right-side {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
             color: #d81b60; /* Rosa scuro */
             font-size: 2.5em;
             margin-top: 20px;
         }
 
         .form-container {
-            max-width: 500px;
-            margin: 30px auto;
             background-color: #ffffff; /* Bianco */
             padding: 20px;
             border-radius: 8px;
@@ -88,60 +107,21 @@
             margin-bottom: 20px;
         }
 
-        .decorations {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-            position: relative;
-            animation: floatDecorations 6s infinite ease-in-out;
+        /* Immagine sinistra */
+        .left-side img {
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
         }
 
-        .decoration {
-            font-size: 2em;
-            color: #d81b60;
+        /* Immagine destra (feto) */
+        .right-side img {
+            width: 80%;
+            max-width: 300px;
+            border-radius: 10px;
         }
 
-        .flower {
-            color: #f48fb1; /* Rosa pastello */
-            animation: floatFlowers 4s infinite ease-in-out;
-        }
-
-        .baby-bottle {
-            color: #ff80ab; /* Rosa baby */
-        }
-
-        .star {
-            color: #ffeb3b; /* Giallo stelle */
-        }
-
-        .cloud {
-            color: #90caf9; /* Blu chiaro */
-        }
-
-        /* Animazione cuori e fiori */
-        @keyframes floatFlowers {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
-        }
-
-        @keyframes floatDecorations {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0); }
-        }
-
-        /* Sezione per l'immagine */
-        .image-container {
-            margin-top: 30px;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
+        /* Cuore animato fluttuante */
         .floating-heart {
             position: fixed;
             top: 20px;
@@ -160,38 +140,33 @@
     </style>
 </head>
 <body>
-    <h1>Calcola le Settimane e Mesi di Gravidanza</h1>
-    <div class="form-container">
-        <div class="heart">💖</div>
+    <div class="container">
+        <!-- Lato sinistro con immagine e form -->
+        <div class="left-side">
+            <h1>Calcola le Settimane e Mesi di Gravidanza</h1>
+            <div class="form-container">
+                <div class="heart">💖</div>
 
-        <label for="giorno">Giorno:</label>
-        <input type="number" id="giorno" min="1" max="31" required>
+                <label for="giorno">Giorno:</label>
+                <input type="number" id="giorno" min="1" max="31" required>
 
-        <label for="mese">Mese:</label>
-        <input type="number" id="mese" min="1" max="12" required>
+                <label for="mese">Mese:</label>
+                <input type="number" id="mese" min="1" max="12" required>
 
-        <label for="anno">Anno:</label>
-        <input type="number" id="anno" min="1900" required>
+                <label for="anno">Anno:</label>
+                <input type="number" id="anno" min="1900" required>
 
-        <button onclick="calcolaSettimaneEMesi()">Calcola</button>
+                <button onclick="calcolaSettimaneEMesi()">Calcola</button>
 
-        <div class="result animate__animated animate__fadeIn" id="risultato"></div>
-        <div class="result animate__animated animate__fadeIn" id="dataParto"></div>
-
-        <div class="image-container" id="immagine">
-            <!-- L'immagine non cambierà dinamicamente, sarà quella di default impostata sopra nel CSS -->
+                <div class="result animate__animated animate__fadeIn" id="risultato"></div>
+                <div class="result animate__animated animate__fadeIn" id="dataParto"></div>
+            </div>
         </div>
 
-        <div class="decorations">
-            <div class="decoration flower">🌸</div>
-            <div class="decoration baby-bottle">🍼</div>
-            <div class="decoration star">⭐</div>
-            <div class="decoration cloud">☁️</div>
-            <div class="decoration flower">🌸</div>
+        <!-- Lato destro con l'immagine del feto -->
+        <div class="right-side">
+            <img src="https://example.com/feto.jpg" alt="Feto in gravidanza">
         </div>
-
-        <!-- Cuore fluttuante animato -->
-        <div class="floating-heart">💖</div>
     </div>
 
     <script>
@@ -231,7 +206,6 @@
             if (dataInizio > dataOggi) {
                 document.getElementById('risultato').innerHTML = "La data di inizio gravidanza non può essere nel futuro.";
                 document.getElementById('dataParto').innerHTML = "";
-                document.getElementById('immagine').innerHTML = "";
                 return;
             }
 
@@ -258,4 +232,5 @@
     </script>
 </body>
 </html>
+
 
