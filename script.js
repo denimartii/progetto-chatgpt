@@ -1,59 +1,116 @@
-// Funzione per verificare se un anno è bisestile
-function isBisestile(anno) {
-    return (anno % 4 === 0 && anno % 100 !== 0) || (anno % 400 === 0);
+/* Stili per la pagina */
+body {
+    font-family: 'Times New Roman', serif; /* Font modificato */
+    background: linear-gradient(to right, #fce4ec, #ff80ab); /* Gradiente rosa */
+    margin: 0;
+    padding: 0;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* L'altezza dell'intero schermo */
+    overflow: hidden; /* Impedisce lo scroll */
 }
 
-function calcolaSettimaneEMesi() {
-    // Ottieni la data inserita dall'utente
-    const giorno = parseInt(document.getElementById('giorno').value);
-    const mese = parseInt(document.getElementById('mese').value);
-    const anno = parseInt(document.getElementById('anno').value);
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    max-width: 1200px;
+    padding: 40px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9); /* Sfondo bianco semitrasparente */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
 
-    // Verifica che i dati siano validi
-    if (isNaN(giorno) || isNaN(mese) || isNaN(anno) || giorno < 1 || mese < 1 || mese > 12 || anno < 1900) {
-        document.getElementById('risultato').innerHTML = "Inserisci una data valida.";
-        return;
-    }
+.left-side {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+    background-color: #ffffff; /* Bianco */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-    // Controlla se febbraio ha il numero corretto di giorni (28 o 29)
-    if (mese === 2) {
-        const maxGiorniFebbraio = isBisestile(anno) ? 29 : 28;
-        if (giorno > maxGiorniFebbraio) {
-            document.getElementById('risultato').innerHTML = `Febbraio ha al massimo ${maxGiorniFebbraio} giorni nel ${anno}.`;
-            return;
-        }
-    }
+.right-side {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
 
-    // Crea la data di inizio della gravidanza
-    const dataInizio = new Date(anno, mese - 1, giorno); // mese - 1 per compatibilità con JavaScript (0-11 per i mesi)
+h1 {
+    color: #d81b60; /* Rosa scuro */
+    font-size: 2.5em;
+    margin-top: 20px;
+    font-family: 'Times New Roman', serif;
+}
 
-    // Ottieni la data odierna
-    const dataOggi = new Date();
+.form-container {
+    margin-top: 20px;
+}
 
-    // Verifica se la data inserita è nel futuro
-    if (dataInizio > dataOggi) {
-        document.getElementById('risultato').innerHTML = "La data di inizio gravidanza non può essere nel futuro.";
-        document.getElementById('dataParto').innerHTML = "";
-        return;
-    }
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #d81b60;
+}
 
-    // Calcola la differenza in millisecondi
-    const differenza = dataOggi - dataInizio;
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #d81b60;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
 
-    // Converti la differenza in giorni
-    const giorniTrascorsi = Math.floor(differenza / (1000 * 60 * 60 * 24));
+button {
+    padding: 10px 20px;
+    background-color: #d81b60; /* Rosa scuro */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 100%;
+}
 
-    // Calcola le settimane
-    const settimane = Math.floor(giorniTrascorsi / 7);
+button:hover {
+    background-color: #c2185b; /* Rosa più scuro */
+}
 
-    // Calcola i mesi (approssimativamente)
-    const mesi = (settimane / 4.3).toFixed(1); // Utilizziamo 4.3 settimane per mese
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8bbd0; /* Rosa chiaro */
+    border: 1px solid #d81b60;
+    border-radius: 4px;
+    font-size: 1.5em;
+    color: #d81b60;
+    text-align: center;
+}
 
-    // Calcola la data di parto stimata (aggiungendo 40 settimane)
-    const dataParto = new Date(dataInizio);
-    dataParto.setDate(dataInizio.getDate() + (40 * 7)); // Aggiungi 40 settimane
+.heart {
+    font-size: 3em;
+    color: #d81b60;
+    margin-bottom: 20px;
+}
 
-    // Mostra i risultati
-    document.getElementById('risultato').innerHTML = `Hai completato ${settimane} settimane, ovvero circa ${mesi} mesi di gravidanza.`;
-    document.getElementById('dataParto').innerHTML = `Data stimata del parto: ${dataParto.toLocaleDateString('it-IT')}`;
+/* Immagine sinistra */
+.left-side img {
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+/* Immagine destra (feto) */
+.right-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Adatta l'immagine senza distorcerla */
+    border-radius: 10px;
 }
