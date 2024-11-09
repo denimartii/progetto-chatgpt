@@ -36,4 +36,35 @@ function calcolaSettimaneEMesi() {
     // Crea la data di inizio della gravidanza
     const dataInizio = new Date(anno, mese - 1, giorno); // mese - 1 per compatibilità con JavaScript (0-11 per i mesi)
 
-    // Ottieni
+    // Ottieni la data odierna
+    const dataOggi = new Date();
+
+    // Verifica se la data inserita è nel futuro
+    if (dataInizio > dataOggi) {
+        document.getElementById('errore').innerHTML = "La data di inizio gravidanza non può essere nel futuro.";
+        document.getElementById('errore').style.display = 'block'; // Mostra l'errore
+        document.getElementById('risultato').innerHTML = "";
+        document.getElementById('dataParto').innerHTML = "";
+        return;
+    }
+
+    // Calcola la differenza in millisecondi
+    const differenza = dataOggi - dataInizio;
+
+    // Converti la differenza in giorni
+    const giorniTrascorsi = Math.floor(differenza / (1000 * 60 * 60 * 24));
+
+    // Calcola le settimane
+    const settimane = Math.floor(giorniTrascorsi / 7);
+
+    // Calcola i mesi (approssimativamente)
+    const mesi = (settimane / 4.3).toFixed(1); // Utilizziamo 4.3 settimane per mese
+
+    // Calcola la data di parto stimata (aggiungendo 40 settimane)
+    const dataParto = new Date(dataInizio);
+    dataParto.setDate(dataInizio.getDate() + (40 * 7)); // Aggiungi 40 settimane
+
+    // Mostra i risultati
+    document.getElementById('risultato').innerHTML = `Hai completato ${settimane} settimane, ovvero circa ${mesi} mesi di gravidanza.`;
+    document.getElementById('dataParto').innerHTML = `Data stimata del parto: ${dataParto.toLocaleDateString('it-IT')}`;
+}
