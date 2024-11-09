@@ -3,34 +3,22 @@ function isBisestile(anno) {
     return (anno % 4 === 0 && anno % 100 !== 0) || (anno % 400 === 0);
 }
 
+// Funzione principale per calcolare settimane e mesi
 function calcolaSettimaneEMesi() {
-    // Ottieni la data inserita dall'utente
     const giorno = parseInt(document.getElementById('giorno').value);
     const mese = parseInt(document.getElementById('mese').value);
     const anno = parseInt(document.getElementById('anno').value);
 
-    // Nascondi il messaggio di errore se la data è valida
-    document.getElementById('errore').style.display = 'none';
-
-    // Verifica che i dati siano validi
     if (isNaN(giorno) || isNaN(mese) || isNaN(anno) || giorno < 1 || mese < 1 || mese > 12 || anno < 1900) {
-        document.getElementById('errore').innerHTML = "Data non valida. Per favore inserisci una data corretta.";
-        document.getElementById('errore').style.display = 'block'; // Mostra l'errore
-        document.getElementById('risultato').innerHTML = ""; // Nascondi i risultati
-        document.getElementById('dataParto').innerHTML = ""; // Nascondi la data del parto
+        document.getElementById('risultato').innerHTML = "Inserisci una data valida.";
         return;
     }
 
-    // Controlla se febbraio ha il numero corretto di giorni (28 o 29)
-    if (mese === 2) {
-        const maxGiorniFebbraio = isBisestile(anno) ? 29 : 28;
-        if (giorno > maxGiorniFebbraio) {
-            document.getElementById('errore').innerHTML = `Febbraio ha al massimo ${maxGiorniFebbraio} giorni nel ${anno}.`;
-            document.getElementById('errore').style.display = 'block'; // Mostra l'errore
-            document.getElementById('risultato').innerHTML = "";
-            document.getElementById('dataParto').innerHTML = "";
-            return;
-        }
+    // Determina i giorni validi per il mese, considerando l'anno bisestile
+    const giorniMese = [31, (isBisestile(anno) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    if (giorno > giorniMese[mese - 1]) {
+        document.getElementById('risultato').innerHTML = `Il mese ${mese} dell'anno ${anno} ha solo ${giorniMese[mese - 1]} giorni.`;
+        return;
     }
 
     // Crea la data di inizio della gravidanza
@@ -39,12 +27,23 @@ function calcolaSettimaneEMesi() {
     // Ottieni la data odierna
     const dataOggi = new Date();
 
-    // Verifica se la data inserita è nel futuro
-    if (dataInizio > dataOggi) {
-        document.getElementById('errore').innerHTML = "La data di inizio gravidanza non può essere nel futuro.";
-        document.getElementById('errore').style.display = 'block'; // Mostra l'errore
-        document.getElementById('risultato').innerHTML = "";
-        document.getElementById('dataParto').innerHTML = "";
+    // Calcola la data limite di 9 mesi fa
+    const dataLimite9Mesi = new Date();
+    dataLimite9Mesi.setMonth(dataOggi.getMonth() - 9);
+
+    // Calcola la data limite di 12 mesi fa
+    const dataLimite12Mesi = new Date();
+    dataLimite12Mesi.setMonth(dataOggi.getMonth() - 12);
+
+    // Verifica se la data di inizio gravidanza è valida
+    if (dataInizio > dataLimite9Mesi) {
+        document.getElementById('risultato').innerHTML = "La data di inizio gravidanza non può superare i 9 mesi a partire dalla data odierna.";
+        return;
+    }
+
+    // Verifica se la data di inizio gravidanza è più vecchia di 12 mesi
+    if (dataInizio < dataLimite12Mesi) {
+        document.getElementById('risultato').innerHTML = "La data di inizio gravidanza non può essere più vecchia di 12 mesi.";
         return;
     }
 
