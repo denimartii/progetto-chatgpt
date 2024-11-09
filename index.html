@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"> <!-- Include Animate.css -->
     <style>
         body {
-            font-family: 'Times New Roman', serif; /* Font Times New Roman */
+            font-family: 'Times New Roman', serif; /* Font modificato */
+            background: linear-gradient(to right, #fce4ec, #ff80ab); /* Gradiente rosa */
             margin: 0;
             padding: 0;
             color: #333;
@@ -16,16 +17,12 @@
             align-items: center;
             height: 100vh; /* L'altezza dell'intero schermo */
             overflow: hidden; /* Impedisce lo scroll */
-            background-image: url('https://img.freepik.com/free-vector/abstract-background_91008-1.jpg'); /* Immagine di sfondo */
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover; /* Adatta l'immagine per coprire tutto lo schermo */
         }
 
         .container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             width: 90%;
             max-width: 1200px;
             padding: 20px;
@@ -45,6 +42,7 @@
             flex: 1;
             padding: 20px;
             text-align: center;
+            position: relative;
         }
 
         h1 {
@@ -119,8 +117,9 @@
 
         /* Immagine destra (feto) */
         .right-side img {
-            width: 100%; /* Aumentato per ingrandirlo */
-            max-width: 600px; /* Aumenta la dimensione massima */
+            width: 100%; /* Si adatta al 100% della larghezza della colonna */
+            height: 100%;
+            object-fit: cover; /* Impedisce che l'immagine sia distorta e la fa riempire l'area */
             border-radius: 10px;
         }
 
