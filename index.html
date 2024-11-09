@@ -23,19 +23,21 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            width: 90%;
+            width: 80%;
             max-width: 1200px;
-            padding: 20px;
+            padding: 40px;
             border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9); /* Sfondo bianco semitrasparente */
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            background-color: rgba(255, 255, 255, 0.8); /* Sfondo bianco semitrasparente */
-            position: relative;
         }
 
         .left-side {
             flex: 1;
             padding: 20px;
-            text-align: center;
+            text-align: left;
+            background-color: #ffffff; /* Bianco */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .right-side {
@@ -49,14 +51,11 @@
             color: #d81b60; /* Rosa scuro */
             font-size: 2.5em;
             margin-top: 20px;
+            font-family: 'Times New Roman', serif;
         }
 
         .form-container {
-            background-color: #ffffff; /* Bianco */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            margin-top: 20px;
         }
 
         label {
@@ -108,6 +107,15 @@
             margin-bottom: 20px;
         }
 
+        .calendar-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e1bee7; /* Colore pastello lilla */
+            border-radius: 4px;
+            font-size: 1.2em;
+            color: #ad1457;
+        }
+
         /* Immagine sinistra */
         .left-side img {
             width: 80%;
@@ -117,9 +125,9 @@
 
         /* Immagine destra (feto) */
         .right-side img {
-            width: 100%; /* Si adatta al 100% della larghezza della colonna */
+            width: 100%;
             height: 100%;
-            object-fit: cover; /* Impedisce che l'immagine sia distorta e la fa riempire l'area */
+            object-fit: cover; /* Adatta l'immagine senza distorcerla */
             border-radius: 10px;
         }
 
@@ -162,6 +170,12 @@
 
                 <div class="result animate__animated animate__fadeIn" id="risultato"></div>
                 <div class="result animate__animated animate__fadeIn" id="dataParto"></div>
+            </div>
+
+            <!-- Info calendario -->
+            <div class="calendar-info">
+                <p><strong>Calendario della gravidanza:</strong></p>
+                <p>Completato <span id="settimane"></span> settimane e <span id="giorni"></span> giorni di gravidanza.</p>
             </div>
         </div>
 
@@ -230,6 +244,10 @@
             // Mostra i risultati
             document.getElementById('risultato').innerHTML = `Hai completato ${settimane} settimane, ovvero circa ${mesi} mesi di gravidanza.`;
             document.getElementById('dataParto').innerHTML = `Data stimata del parto: ${dataParto.toLocaleDateString('it-IT')}`;
+
+            // Aggiorna il calendario
+            document.getElementById('settimane').innerText = settimane;
+            document.getElementById('giorni').innerText = giorniTrascorsi;
         }
     </script>
 </body>
