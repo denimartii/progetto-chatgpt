@@ -16,9 +16,10 @@
             background-image: url('https://chat.google.com/u/0/api/get_attachment_url?url_type=FIFE_URL&content_type=image%2Fwebp&attachment_token=AOo0EEUsTP9aKXx9LB2iExUeyfn3O0giE7lGErIPapqpEl0HLHLDNoS8Gp6P5%2FBVWvrW3eFLm22sOFx4m8QitOOGZBzD4xc%2FiVQMzWxQKZa%2B0BgxWxmcH26HFzpeEg2kCsTIzbodZRS57iQ7DSVVRkGLZgr%2BgmVmYliYY998tdwfTNgS8UnWwNpXKkHEThJh4%2FlZCaVqdXSE5ojAXC%2BfvMp%2BBP7gum%2F2tOwfa1y7RnXTtWpNaEpMN5vJhN2cLO7%2FPZPbsBbfsEHHw%2FsFaQpcunkOkaQ78YJ9rh86YGmW5Cj8MIqXdtBV7eq3XiRd%2BbS%2BMIxI5opi0InSjnhQLjILxiRbscfM%2BmNalE30HP5LhubpOn5FjNDYECheU4T14ByFNFntukBKmlWInF7dXTb%2B3t0%2F0Aeki3RYFd2LRqOEXHRiDPCVjcUcLny%2By08zo5QySW6Kz%2FTcaAwy0yHwTDKPR7QqLDhdaW2EM58uo718VewUrkt6AeN5wYcPVVj%2Fpa3UegGDsUle56pNHObD3MzvJh9N%2BlrD2RiEGQP%2B%2FzJStWeoqyftcmr29AgCYr%2BoNya37%2Fn9lvc5RxNzWOf4iBNk3RIf05wmoGWBESGCG%2BimQxFxP3%2BGYGJJUXGD9CKxEi3RyvYY9T5LEZXfA4NUL2qDkM4PS%2B%2B8M2BrbOjXlVKomyMMMsZHzwvmvEBDTjpx861fMOytoD0tYmF4okRV2r%2FnfWjku%2FCPLU6wsymtSYHgsoJvHRsG%2B0n5g%2BN0sz%2BMAN2683NeNvwgQi4yxah8Z%2Fwtalvd2V31mXHDAKhSSXZm9UGgD%2FKj6%2FeJ&sz=w512');
             background-position: center; /* Centra l'immagine */
             background-repeat: no-repeat; /* Non ripetere l'immagine */
-            background-size: cover; /* Copri tutto lo schermo con l'immagine */
+            background-size: contain; /* Rimpicciolisce l'immagine per adattarla al contenitore senza distorsioni */
+            background-attachment: fixed; /* Mantieni l'immagine fissa durante lo scroll */
             overflow-y: auto; /* Permette lo scroll verticale */
-            height: 100%; /* Assicurati che il body prenda tutta l'altezza della pagina */
+            height: 100vh; /* Imposta l'altezza a 100vh per adattare meglio al viewport */
         }
 
         h1 {
