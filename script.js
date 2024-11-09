@@ -1,116 +1,39 @@
-/* Stili per la pagina */
-body {
-    font-family: 'Times New Roman', serif; /* Font modificato */
-    background: linear-gradient(to right, #fce4ec, #ff80ab); /* Gradiente rosa */
-    margin: 0;
-    padding: 0;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* L'altezza dell'intero schermo */
-    overflow: hidden; /* Impedisce lo scroll */
+// Funzione per verificare se un anno è bisestile
+function isBisestile(anno) {
+    return (anno % 4 === 0 && anno % 100 !== 0) || (anno % 400 === 0);
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 80%;
-    max-width: 1200px;
-    padding: 40px;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.9); /* Sfondo bianco semitrasparente */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
+function calcolaSettimaneEMesi() {
+    // Ottieni la data inserita dall'utente
+    const giorno = parseInt(document.getElementById('giorno').value);
+    const mese = parseInt(document.getElementById('mese').value);
+    const anno = parseInt(document.getElementById('anno').value);
 
-.left-side {
-    flex: 1;
-    padding: 20px;
-    text-align: left;
-    background-color: #ffffff; /* Bianco */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+    // Nascondi il messaggio di errore se la data è valida
+    document.getElementById('errore').style.display = 'none';
 
-.right-side {
-    flex: 1;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-}
+    // Verifica che i dati siano validi
+    if (isNaN(giorno) || isNaN(mese) || isNaN(anno) || giorno < 1 || mese < 1 || mese > 12 || anno < 1900) {
+        document.getElementById('errore').innerHTML = "Data non valida. Per favore inserisci una data corretta.";
+        document.getElementById('errore').style.display = 'block'; // Mostra l'errore
+        document.getElementById('risultato').innerHTML = ""; // Nascondi i risultati
+        document.getElementById('dataParto').innerHTML = ""; // Nascondi la data del parto
+        return;
+    }
 
-h1 {
-    color: #d81b60; /* Rosa scuro */
-    font-size: 2.5em;
-    margin-top: 20px;
-    font-family: 'Times New Roman', serif;
-}
+    // Controlla se febbraio ha il numero corretto di giorni (28 o 29)
+    if (mese === 2) {
+        const maxGiorniFebbraio = isBisestile(anno) ? 29 : 28;
+        if (giorno > maxGiorniFebbraio) {
+            document.getElementById('errore').innerHTML = `Febbraio ha al massimo ${maxGiorniFebbraio} giorni nel ${anno}.`;
+            document.getElementById('errore').style.display = 'block'; // Mostra l'errore
+            document.getElementById('risultato').innerHTML = "";
+            document.getElementById('dataParto').innerHTML = "";
+            return;
+        }
+    }
 
-.form-container {
-    margin-top: 20px;
-}
+    // Crea la data di inizio della gravidanza
+    const dataInizio = new Date(anno, mese - 1, giorno); // mese - 1 per compatibilità con JavaScript (0-11 per i mesi)
 
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 1.2em;
-    color: #d81b60;
-}
-
-input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #d81b60;
-    border-radius: 4px;
-    font-size: 1em;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #d81b60; /* Rosa scuro */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.2em;
-    width: 100%;
-}
-
-button:hover {
-    background-color: #c2185b; /* Rosa più scuro */
-}
-
-.result {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f8bbd0; /* Rosa chiaro */
-    border: 1px solid #d81b60;
-    border-radius: 4px;
-    font-size: 1.5em;
-    color: #d81b60;
-    text-align: center;
-}
-
-.heart {
-    font-size: 3em;
-    color: #d81b60;
-    margin-bottom: 20px;
-}
-
-/* Immagine sinistra */
-.left-side img {
-    width: 80%;
-    max-width: 400px;
-    border-radius: 10px;
-}
-
-/* Immagine destra (feto) */
-.right-side img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Adatta l'immagine senza distorcerla */
-    border-radius: 10px;
-}
+    // Ottieni
