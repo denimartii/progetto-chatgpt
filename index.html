@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -8,16 +8,16 @@
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif; /* Font Comic Sans */
-            background-color: #fce4ec; /* Rosa chiaro */
             margin: 0;
             padding: 0;
             color: #333;
-            background-image: url('https://www.pngrepo.com/download/45568/heart-icon.png'), url('https://www.pngrepo.com/download/46367/cloud.png');
-            background-position: top left, bottom right;
-            background-repeat: no-repeat, no-repeat;
-            background-size: 100px, 100px;
             overflow-y: auto; /* Permette lo scroll verticale */
             height: 100%; /* Assicurati che il body prenda tutta l'altezza della pagina */
+            background: linear-gradient(to bottom right, #ffb6c1, #f8bbd0); /* Gradiente rosa chiaro */
+            background-image: url('https://www.pngrepo.com/download/45568/heart-icon.png'), url('https://www.pngrepo.com/download/46367/cloud.png');
+            background-position: 10% 20%, 90% 80%;
+            background-repeat: no-repeat, no-repeat;
+            background-size: 80px, 80px;
         }
 
         h1 {
@@ -44,7 +44,7 @@
             color: #d81b60;
         }
 
-        input[type="number"] {
+        input[type="number"], input[type="text"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -171,6 +171,9 @@
         <label for="anno">Anno:</label>
         <input type="number" id="anno" min="1900" required>
 
+        <label for="sfondo">Link Immagine di Sfondo:</label>
+        <input type="text" id="sfondo" placeholder="Inserisci URL immagine di sfondo">
+
         <button onclick="calcolaSettimaneEMesi()">Calcola</button>
 
         <div class="result animate__animated animate__fadeIn" id="risultato"></div>
@@ -198,6 +201,7 @@
             const giorno = parseInt(document.getElementById('giorno').value);
             const mese = parseInt(document.getElementById('mese').value);
             const anno = parseInt(document.getElementById('anno').value);
+            const linkSfondo = document.getElementById('sfondo').value; // Link dell'immagine di sfondo
 
             // Verifica che i dati siano validi
             if (isNaN(giorno) || isNaN(mese) || isNaN(anno) || giorno < 1 || mese < 1 || mese > 12 || anno < 1900) {
@@ -243,6 +247,12 @@
             const immagineContainer = document.getElementById('immagine');
             const immagine = 'https://www.my-personaltrainer.it/imgs/2019/09/29/sviluppo-dell-embrione-feto-2-orig.jpeg';
             immagineContainer.innerHTML = `<img src="${immagine}" alt="Embrione o Feto">`;
+
+            // Cambia lo sfondo se l'utente ha inserito un link
+            if (linkSfondo) {
+                document.body.style.backgroundImage = `url(${linkSfondo}), url('https://www.pngrepo.com/download/45568/heart-icon.png'), url('https://www.pngrepo.com/download/46367/cloud.png')`;
+                document.body.style.backgroundSize = 'cover, 80px, 80px';
+            }
         }
     </script>
 </body>
