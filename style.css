@@ -1,9 +1,15 @@
+/* Reset CSS: Impostiamo alcuni valori di default */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Impostazioni di base */
 body {
     font-family: 'Times New Roman', serif; /* Font Times New Roman */
     background: url('https://img.freepik.com/premium-vector/pink-sky-with-clouds-baby-background_160081-1204.jpg') no-repeat center center fixed; /* Sfondo con immagine */
     background-size: cover; /* L'immagine copre tutto lo schermo */
-    margin: 0;
-    padding: 0;
     color: #333;
     height: 100vh; /* Assicurati che il body prenda tutta l'altezza della pagina */
     display: flex;
